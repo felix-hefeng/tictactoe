@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Tictactoe</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script type="text/javascript" src="jquery-1.7.min.js"></script>
+    <script type="text/javascript">
+		function set_value(row, column){
+			$.ajax({
+            	url: "/set_value",
+            	data: "row="+row+"&column="+column,
+            	dataType: "html",
+            	success: function(data) {
+              		$('#game_body').html(data);
+            	}
+          });
+		}
+	</script>
+  </head>
+  <body>
+    <div id="game_body">
+    	<table>
+			<% @board.each_with_index do |board_row, row| %>
+				<tr>
+					<% board_row.each_with_index do |board_column, column| %>
+						<td onclick="set_value(<%= row %>, <%= column %>)" ><%= board_column %></td>
+					<% end %>
+				</tr>
+			<% end %>
+		</table>
+		<div class="players"><p><span class="active">Play1: X </span>, <span>Play2: O</span></p></div>
+    </div>
+  </body>
+</html>

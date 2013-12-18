@@ -1,0 +1,21 @@
+<table>
+	<% @board.each_with_index do |board_row, row| %>
+		<tr>
+			<% board_row.each_with_index do |board_column, column| %>
+				<% if board_column %>
+					<td><%= board_column %></td>				
+				<% else %>
+					<td onclick="set_value(<%= row %>, <%= column %>)" ><%= board_column %></td>	
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+<div class="players">
+	<% if @win %>
+	  <p class="win"><%= @player %> win!</p>
+	<% else %>
+		<p><span <% if @player == 'O' %>class="active"<% end %>>Player1: X </span>, <span <% if @player == 'X' %>class="active"<% end %>>Player2: O</span>
+		</p>
+	<% end %>
+</div>
